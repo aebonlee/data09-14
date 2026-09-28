@@ -1,0 +1,49 @@
+{
+  "_안내": "이 파일만 고치면 코드 수정 없이 폴더·열 이름·판정 기준을 바꿀 수 있습니다. 판정 임계값은 모두 가상의 값입니다 — 실제 값은 담당자가 채웁니다.",
+  "inbox_dir": "data/inbox",
+  "db_path": "data/vibration.db",
+  "report_dir": "data/reports",
+  "csv_encodings": ["utf-8-sig", "cp949"],
+  "file_name_pattern": "^(?:예시데이터_)?(?P<equipment>[A-Za-z0-9-]+)_(?P<datetime>\\d{8}-\\d{6})_(?P<sensor>vib|gyro)\\.csv$",
+  "datetime_format": "%Y%m%d-%H%M%S",
+  "missing_policy": "reject",
+  "sensors": {
+    "vib": {
+      "label": "진동",
+      "time_column": "time_s",
+      "channels": {"X": "ax", "Y": "ay", "Z": "az"},
+      "unit": "g"
+    },
+    "gyro": {
+      "label": "각속도",
+      "time_column": "time_s",
+      "channels": {"X": "gx", "Y": "gy", "Z": "gz"},
+      "unit": "deg/s"
+    }
+  },
+  "equipment_file": {
+    "id_column": "장비ID",
+    "name_column": "장비명"
+  },
+  "algorithm": {
+    "module": "algorithms.placeholder",
+    "function": "run"
+  },
+  "thresholds": {
+    "version": "예시-v0 (가상 값)",
+    "higher_is_worse": true,
+    "items": {
+      "vib_*_rms": {"warn": 0.5, "fault": 1.0},
+      "vib_*_peak": {"warn": 1.8, "fault": 3.0},
+      "vib_*_kurtosis": {"warn": 4.0, "fault": 6.0},
+      "gyro_*_rms": {"warn": 5.0, "fault": 10.0},
+      "gyro_*_peak": {"warn": 15.0, "fault": 30.0}
+    }
+  },
+  "report_phrases": {
+    "정상": "모든 판정 항목이 주의 기준 미만입니다.",
+    "주의": "주의 기준 이상인 항목이 있습니다. 다음 측정에서 추이를 확인하십시오.",
+    "고장": "고장 기준 이상인 항목이 있습니다. 장비 점검이 필요합니다.",
+    "판정 불가": "판정 기준이 설정된 항목이 없어 등급을 매기지 않았습니다."
+  }
+}

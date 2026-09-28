@@ -2,3 +2,7 @@
 node_modules/
 __pycache__/
 .env
+
+# 실행 중에 생기는 DB·보고서·입력 폴더 (예시 실행 결과 포함)
+data/
+*.pyc
